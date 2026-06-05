@@ -1,8 +1,8 @@
 package main;
 
 public class Account{
-    private String accountNumber;
-    private String holderName;
+    final private String accountNumber;
+    final  private String holderName;
     private double balance;
 
     public Account(String accountNumber,String holderName,double balance){
@@ -21,6 +21,10 @@ public class Account{
 
     public double getBalance(){
         return balance;
+    }
+
+    public void setBalance(double balance){
+        this.balance = balance;
     }
     
 }
