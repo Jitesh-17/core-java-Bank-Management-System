@@ -1,15 +1,24 @@
 package main;
 
 public class AccountService {
+
+    private AccountRepository repository;
+
+    public AccountService(AccountRepository repository){
+        this.repository = repository;
+    }
     
     public Account createAccount(String accountNumber,String holderName,double balance){
         
 
-        return new Account(
+        Account account = new Account(
             accountNumber,
             holderName,
             balance
         );
+
+        repository.saveAccount(account);
+        return account;
 
     }
 
@@ -37,5 +46,18 @@ public class AccountService {
         double updatedBalance = acc.getBalance()-amount;
 
         acc.setBalance(updatedBalance);
+    }
+
+    public Account getAccount(String accountNumber){
+       return repository.findAccount(accountNumber);
+    }
+
+    public void displayAllAccounts (){
+        for( Account accounts : repository.getAllAccounts()){
+            
+            System.out.println("Account Number:"+accounts.getAccountNumber()+" "+"Account holder name:"+accounts.getHolderName()
+            +" "+"Current Balance:"+accounts.getBalance());
+            
+        }
     }
 }
