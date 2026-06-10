@@ -66,11 +66,17 @@ public class BankMenu{
                         }
                         System.out.println("Enter Deposit Amount:");
                         double amount = sc.nextDouble();
-
+                        
+                        try { 
                         service.deposit(account,amount);
                         System.out.println("Deposit Successful");
 
                         System.out.println("Updated Balance:"+ account.getBalance());
+                        } 
+                        catch(InvalidAmountException e){
+                            System.out.println(e.getMessage());
+                        }
+
                         break;
                 case 4: System.out.println("Enter Your Account number");
                         accountNumber = sc.nextLine();
@@ -82,11 +88,20 @@ public class BankMenu{
                         }
                         System.out.println("Enter the amount to be withdrawn");
                         amount = sc.nextDouble();
-
+                        
+                        try { 
                         service.withdraw(account, amount);
                         System.out.println("Withdrawal Succesful");
 
                         System.out.println("updated balance:"+ account.getBalance());
+                        }
+                        catch(InvalidAmountException e){
+                            System.out.println(e.getMessage());
+                        }
+                        catch(InsufficientAmountException e){
+                            System.out.println(e.getMessage());
+                        }
+                        
                         break;
                 case 5:System.out.println("Enter Your Account number");
                         accountNumber = sc.nextLine();
