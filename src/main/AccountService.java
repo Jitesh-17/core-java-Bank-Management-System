@@ -27,8 +27,7 @@ public class AccountService {
 
     public void deposit(Account acc,double amount){
         if(amount<=0){
-            System.out.println("invalid amount");
-            return;
+            throw new InvalidAmountException("Invalid Amount");
         }
 
         double updatedBalance = acc.getBalance()+amount;
@@ -38,13 +37,11 @@ public class AccountService {
 
     public void withdraw(Account acc,double amount){
         if(amount<=0){
-            System.out.println("invalid amount");
-            return;
+            throw new InvalidAmountException("Invalid Amount");
         }
 
         if(amount>acc.getBalance()){
-            System.out.println("insufficient balance");
-            return;
+            throw new InsufficientAmountException("Insufficient balance");
         }
         double updatedBalance = acc.getBalance()-amount;
 
