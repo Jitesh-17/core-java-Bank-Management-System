@@ -3,13 +3,16 @@ package main;
 public class AccountService {
 
     private AccountRepository repository;
+    
 
     public AccountService(AccountRepository repository){
         this.repository = repository;
     }
+    private static long accountcounter = 1001;
     
-    public Account createAccount(String accountNumber,String holderName,double balance){
+    public Account createAccount(String holderName,double balance){
         
+        String accountNumber = "ACC" + accountcounter++;
 
         Account account = new Account(
             accountNumber,
@@ -48,6 +51,10 @@ public class AccountService {
         acc.setBalance(updatedBalance);
     }
 
+    public double checkBalance(Account account){
+        return account.getBalance();
+    }
+
     public Account getAccount(String accountNumber){
        return repository.findAccount(accountNumber);
     }
@@ -60,4 +67,6 @@ public class AccountService {
             
         }
     }
+
+
 }
