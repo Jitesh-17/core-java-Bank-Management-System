@@ -20,7 +20,8 @@ public class BankMenu{
             System.out.println("Press 3 to Deposit Money");
             System.out.println("Press 4 to withdrawal");
             System.out.println("Press 5 to check balance");
-            System.out.println("Press 6 to exit");
+            System.out.println("Press 6 to view Transaction History");
+            System.out.println("Press 7 to exit");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -114,8 +115,19 @@ public class BankMenu{
 
                         System.out.println("Current Balance:"+ service.checkBalance(account));
                         break;
+                case 6: System.out.println("Enter your Account Number");
+                        accountNumber = sc.nextLine();
+                        account = service.getAccount(accountNumber);
+
+                        if(account==null){
+                            System.out.println("Account not found");
+                            break;
+                        }
                         
-                case 6:System.out.println("Thank You");
+                        service.showTransactionHistory(account);
+                        break;
+                        
+                case 7:System.out.println("Thank You");
                         return;
 
                 default:System.out.println("Invalid choice");    
