@@ -33,6 +33,10 @@ public class AccountService {
         double updatedBalance = acc.getBalance()+amount;
 
         acc.setBalance(updatedBalance);
+
+        Transaction transaction = new Transaction("Deposit", amount);
+
+        acc.getTransaction().add(transaction);
     }
 
     public void withdraw(Account acc,double amount){
@@ -46,6 +50,10 @@ public class AccountService {
         double updatedBalance = acc.getBalance()-amount;
 
         acc.setBalance(updatedBalance);
+
+        Transaction transaction = new Transaction("withdraw",amount);
+
+        acc.getTransaction().add(transaction);
     }
 
     public double checkBalance(Account account){
@@ -62,6 +70,13 @@ public class AccountService {
             System.out.println("Account Number:"+accounts.getAccountNumber()+" "+"Account holder name:"+accounts.getHolderName()
             +" "+"Current Balance:"+accounts.getBalance());
             
+        }
+    }
+
+    public void showTransactionHistory(Account account){
+
+        for (Transaction transaction : account.getTransaction()){
+            System.out.println(transaction.getType() + " " + transaction.getAmount());
         }
     }
 
