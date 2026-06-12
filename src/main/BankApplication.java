@@ -7,7 +7,8 @@ public class BankApplication {
         AccountRepository repository = new AccountRepository();
         
         AccountService service = new AccountService(repository);
-
+        service.loadAccounts();
+        service.loadTransactions();
         BankMenu menu = new BankMenu(service);
         menu.start();
 
