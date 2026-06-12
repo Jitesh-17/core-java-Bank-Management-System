@@ -128,12 +128,13 @@ public class BankMenu{
                         break;
                         
                 case 7:System.out.println("Thank You");
+                        sc.close();
                         return;
 
                 default:System.out.println("Invalid choice");    
                    
             }
-            sc.close();
+           
         }
     
     }
