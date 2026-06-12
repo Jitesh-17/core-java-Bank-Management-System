@@ -1,6 +1,12 @@
 package main;
 
+import java.util.List;
+
 public class AccountService {
+
+    //fileservice object
+    private FileService fileService = new FileService();
+
 
     private AccountRepository repository;
     
@@ -21,6 +27,8 @@ public class AccountService {
         );
 
         repository.saveAccount(account);
+        fileService.saveAccount(account);
+        
         return account;
 
     }
@@ -37,6 +45,8 @@ public class AccountService {
         Transaction transaction = new Transaction("Deposit", amount);
 
         acc.getTransaction().add(transaction);
+
+        fileService.saveTransaction(acc.getAccountNumber(), transaction);
     }
 
     public void withdraw(Account acc,double amount){
@@ -54,6 +64,8 @@ public class AccountService {
         Transaction transaction = new Transaction("withdraw",amount);
 
         acc.getTransaction().add(transaction);
+        
+        fileService.saveTransaction(acc.getAccountNumber(), transaction);
     }
 
     public double checkBalance(Account account){
@@ -80,5 +92,17 @@ public class AccountService {
         }
     }
 
+    public void loadAccounts(){
 
+        List<Account> loadedAccounts= fileService.loadAccounts();
+        for(Account accounts : loadedAccounts ){
+            repository.saveLoadedAccount(accounts);
+        }
+    }
+
+    public void loadTransactions(){
+        fileService.loadTransactions(repository);
+    }
+
+    
 }
