@@ -20,4 +20,8 @@ public class AccountRepository {
     public Collection<Account> getAllAccounts(){
         return accounts.values();
     }
+
+    public void saveLoadedAccount(Account account){
+            accounts.put(account.getAccountNumber(),account);
+    }
 }
